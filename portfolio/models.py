@@ -15,6 +15,8 @@ class Portfolio(models.Model):
     github = models.URLField(null=True, blank=True)
     linked_in = models.URLField(null=True, blank=True)
     leetcode = models.URLField(null=True, blank=True)
+    hackerrank = models.URLField(null=True, blank=True)
+    email = models.URLField(null=True, blank=True)
 
     create_at = models.DateField(auto_now_add=True)
 
@@ -54,6 +56,9 @@ class Skill(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+    
+class Project(models.Model):
+    title = models.CharField(max_length=256, blank=True, default="")
 
 class LifeJourney(models.Model):
     portfolio = models.ForeignKey(
