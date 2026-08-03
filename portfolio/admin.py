@@ -5,4 +5,6 @@ admin.site.register([
     Portfolio,
     LifeJourney,
     Certificate,
+    SkillCategory,
+    Skill,
 ])

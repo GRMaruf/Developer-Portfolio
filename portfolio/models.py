@@ -21,10 +21,45 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.page_title
 
+class SkillCategory(models.Model):
+    portfolio = models.ForeignKey(
+        Portfolio, 
+        on_delete=models.SET_NULL,
+        null=True,
+        default=Portfolio.objects.first,
+        related_name="skill_category"
+    )
+    
+    order = models.PositiveSmallIntegerField(default=0)
+    card_icon_text = models.CharField(max_length=20, default="", blank=True)
+    category_name = models.CharField(max_length=50, blank=True, default="")
+
+    def __str__(self):
+        return f'{self.card_icon_text} - {self.category_name}'
+    
+    class Meta:
+        verbose_name_plural = 'Skill Categories'
+        ordering = ['order']
+    
+class Skill(models.Model):
+    category = models.ForeignKey(
+        SkillCategory, 
+        on_delete=models.SET_NULL,
+        null=True,
+        default=SkillCategory.objects.first or SkillCategory.objects.none,
+        related_name="skills"
+    )
+
+    name = models.CharField(max_length=200, blank=True, default="")
+
+    def __str__(self):
+        return f'{self.name}'
+
 class LifeJourney(models.Model):
     portfolio = models.ForeignKey(
         Portfolio, 
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
+        null=True,
         default=Portfolio.objects.first,
         related_name="journeys"
     )
@@ -44,7 +79,8 @@ class LifeJourney(models.Model):
 class Certificate(models.Model):
     portfolio = models.ForeignKey(
         Portfolio, 
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
+        null=True,
         default=Portfolio.objects.first,
         related_name="certificates"
     )
