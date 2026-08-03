@@ -497,7 +497,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 .modal-section li { color: var(--color-muted); margin-bottom: 0.4rem; font-size: 0.95rem; }
 .modal-section p { color: var(--color-muted); }
 .modal-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.modal-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; padding-inline: 2rem; }
+.modal-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; padding-inline: 2rem; margin-bottom: 2rem;}
 
 /* ===================================================================
    13. TIMELINE (Experience / Education / Achievements)
@@ -547,9 +547,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 .learning-list-item { display: flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-muted); }
 .learning-list-item::before { content: '→'; color: var(--color-primary); font-weight: 600; }
 
-.ring-stage { perspective: 1000px; perspective-origin: 50% 50%; height: 480px; position: relative; display: grid; place-items: center; }
+.ring-stage { perspective: 1000px; perspective-origin: 50% 50%; height: 480px; position: relative; display: grid; place-items: center; pointer-events: none; /* ADD THIS */}
 .ring { position: relative; transform-style: preserve-3d; will-change: transform; }
-.ring-item { position: absolute; top: 50%; left: 50%; transform-origin: center; white-space: nowrap; }
+.ring-item { position: absolute; top: 50%; left: 50%; transform-origin: center; white-space: nowrap; pointer-events: none; /* ADD THIS */}
 .ring-item span {
   display: inline-block; transform: translate(-50%, -50%);
   font-family: var(--font-display); font-weight: 700;
