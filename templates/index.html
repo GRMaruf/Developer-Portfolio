@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Python · Django · REST APIs · PostgreSQL." />
 
 <!-- Canonical -->
-<link rel="canonical" href="{{ portfolio.rout_url }}" />
+<link rel="canonical" href="{{ portfolio.root_url }}" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,8 +39,8 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "{{ portfolio.user_full_name }}",
-  "jobTitle": "Junior Backend Developer",
-  "url": "{{ portfolio.rout_url }}",
+  "jobTitle": "{{ portfolio.job_title }}",
+  "url": "{{ portfolio.root_url }}",
   "knowsAbout": ["Python", "Django", "Django REST Framework", "PostgreSQL", "REST API Design", "Database Design"],
   "alumniOf": "Dhaka University",
   "sameAs": [
@@ -124,7 +124,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="#projects" class="btn btn-ghost">View projects</a>
-        <a href="assets/resume.pdf" class="btn btn-outline" download>
+        <a href="{% if portfolio.resume %}{{ portfolio.resume.url }}{% else %}#{% endif %}" class="btn btn-outline" download>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Resume
         </a>
@@ -565,10 +565,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#hero" class="nav-logo">
-          <span class="nav-logo-mark">A</span>
-          <span>GRMaruf</span>
+          <span class="nav-logo-mark">{{ portfolio.logo_text_mark }}</span>
+          <span>{{ portfolio.user_short_name }}</span>
         </a>
-        <p>Junior Django / Backend Developer building reliable backends with Python, Django REST Framework, and PostgreSQL. Based in Dhaka, open to remote.</p>
+        <p>{{ portfolio.footnote }}</p>
       </div>
 
       <div class="footer-col">
@@ -595,7 +595,7 @@
       <div class="footer-col">
         <h4>Resources</h4>
         <ul>
-          <li><a href="assets/resume.pdf" download>Resume (PDF)</a></li>
+          <li><a href="{% if portfolio.resume %}{{ portfolio.resume.url }}{% else %}#{% endif %}" download>Resume (PDF)</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#learning">Currently learning</a></li>
         </ul>

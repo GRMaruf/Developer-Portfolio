@@ -3,15 +3,27 @@ from django.db import models
 class Portfolio(models.Model):
     # Golam Rasul Maruf — Backend Developer · Django & Python
     page_title = models.CharField(max_length=256, blank=True, default="")
-    rout_url = models.CharField(max_length=256, blank=True, default="")
+    root_url = models.CharField(max_length=256, blank=True, default="")
 
     # User
     logo_text_mark = models.CharField(max_length=20, default="", blank=True)
     user_short_name = models.CharField(max_length=50, blank=True, default="")
     user_full_name = models.CharField(max_length=200, blank=True, default="")
+    job_title = models.CharField(max_length=256, blank=True, default="")
+    resume = models.FileField(
+        upload_to="",
+        blank=True,
+        null=True,
+        help_text="e.g. expected pdf file with proper nameing as- 'Junior_Web_Developer_GRMaruf.pdf'"
+    ) # Handle post delete operations
 
     # Hero
-    image = models.ImageField(upload_to="", blank=True, null=True, help_text="e.g. expected 300x300 resolution") # Handle post delete operations
+    image = models.ImageField(
+        upload_to="", 
+        blank=True, 
+        null=True, 
+        help_text="e.g. expected 300x300 resolution"
+    ) # Handle post delete operations
     status = models.CharField(max_length=256, blank=True, default="")
     title = models.CharField(max_length=256, blank=True, default="")
     description = models.TextField(blank=True, null=True) # provide support for html tags, use "safe" template filter
@@ -22,6 +34,9 @@ class Portfolio(models.Model):
     leetcode = models.URLField(null=True, blank=True)
     hackerrank = models.URLField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
+
+    # Footer note
+    footnote = models.TextField(blank=True, null=True)
 
     create_at = models.DateField(auto_now_add=True)
 
@@ -101,7 +116,11 @@ class Project(models.Model):
         default=Portfolio.objects.first,
         related_name="projects"
     )
-    screenshot = models.ImageField(upload_to="project_shots/", blank=True, null=True, help_text="e.g. expected 300x300 resolution") # Handle post delete operations
+    screenshot = models.ImageField(
+        upload_to="project_shots/", 
+        blank=True, null=True, 
+        help_text="e.g. expected 300x300 resolution"
+    ) # Handle post delete operations
     title = models.CharField(max_length=256, blank=True, default="")
     description = models.TextField(blank=True, null=True)
     github = models.URLField(null=True, blank=True)
