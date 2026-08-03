@@ -3,7 +3,7 @@
 > A fast, accessible, and modern developer portfolio built with HTML5, Vanilla CSS, and Vanilla JavaScript. 
 > Designed to showcase backend and Django development skills while demonstrating strong web fundamentals.
 
-🔗 **Live Demo:** [https://your-portfolio-demo.vercel.app](https://your-portfolio-demo.vercel.app)
+🔗 **Live Demo:** [https://grmaruf.pythonanywhere.com/](https://grmaruf.pythonanywhere.com/)
 
 ![Portfolio Preview](https://picsum.photos/seed/devfolio-readme-banner/1200/600)
 
