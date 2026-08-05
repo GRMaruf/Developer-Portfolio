@@ -123,11 +123,28 @@ class Project(models.Model):
     ) # Handle post delete operations
     title = models.CharField(max_length=256, blank=True, default="")
     description = models.TextField(blank=True, null=True)
+    tag_list = models.CharField(max_length=256, blank=True, default="", help_text="e.g. tag1, tag2, ")
     github = models.URLField(null=True, blank=True)
     live_link = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.title}'
+
+class ProjectDetail(models.Model):
+    portfolio = models.OneToOneField(
+        Project, 
+        on_delete=models.CASCADE,
+        null=True,
+        related_name="details"
+    )
+    subtitle = models.CharField(max_length=256, blank=True, default="")
+    overview = models.TextField(blank=True, null=True)
+    features = models.TextField(blank=True, null=True, help_text="state features in each line")
+    tags = models.CharField(max_length=256, blank=True, default="", help_text="e.g. tag1, tag2, ")
+    learned = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'Details of - {self.portfolio.title}'
     
 class Tag(models.Model):
     project = models.ForeignKey(

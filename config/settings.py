@@ -74,6 +74,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Email Configurations
+
+# The backend handler for SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Standard Google SMTP Server Configurations
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # Keep this False when using TLS/587
+
+# Your Credentials
+EMAIL_HOST_USER = 'golamrasulmaruf@gmail.com'  # Your actual Gmail address
+EMAIL_HOST_PASSWORD = ''  # Paste your 16-character App Password here
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
+# Default sender profile address
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 

@@ -237,121 +237,15 @@
   const closeBtn = document.getElementById('modal-close');
   const openers = document.querySelectorAll('.js-open-modal, .project-card');
 
-  const PROJECTS = {
-    'quiz-portal': {
-      title: 'Quiz Portal',
-      sub: 'Timed quizzes · Question banks · Leaderboard · Analytics',
-      img: 'https://picsum.photos/seed/project-quiz-portal/1200/675',
-      overview: 'A Django-based quiz platform built for university tutoring sessions. Supports question banks by topic, randomized question order per attempt, timed sessions, and a per-student analytics view showing weak areas. Includes an admin interface for instructors to author questions with rich-text support and inline LaTeX.',
-      features: [
-        'Question bank with topic tagging, difficulty levels, and rich-text + LaTeX support',
-        'Randomized question order and answer-shuffling per attempt to discourage cheating',
-        'Timed sessions with server-side enforcement and graceful timeout handling',
-        'Leaderboard with rank, percentile, and per-topic breakdown',
-        'Analytics dashboard showing weakest topics per student',
-        'JWT authentication with role-based permissions (student vs instructor)'
-      ],
-      tags: ['Django', 'Django REST Framework', 'PostgreSQL', 'JWT', 'pytest', 'Celery'],
-      learned: 'Learned the hard way that "server-side time" and "client-side time" are not the same thing — moved all timing logic to the backend after a student exploited clock skew. Also learned to model attempt state as an explicit state machine rather than a pile of boolean flags.',
-      github: 'https://github.com/grmaruf/quiz-portal',
-      demo: '#'
-    },
-    'resume-builder': {
-      title: 'Resume Builder',
-      sub: 'Multi-template · Live preview · PDF export',
-      img: 'https://picsum.photos/seed/project-resume-builder/1200/675',
-      overview: 'A resume builder for students who hate fighting with Word. Users fill structured forms per section (education, experience, skills, projects); the app renders a live preview and exports a clean PDF via WeasyPrint. Supports three templates and per-section autosave.',
-      features: [
-        'Three templates with switchable typography and accent colors',
-        'Live preview as you type — no save step required for visual updates',
-        'Per-section autosave to localStorage + server sync on blur',
-        'PDF export via WeasyPrint with consistent fonts across templates',
-        'Drag-and-drop reordering for experience and projects',
-        'Public shareable link with optional password protection'
-      ],
-      tags: ['Django', 'WeasyPrint', 'AJAX', 'SQLite', 'Vanilla JS'],
-      learned: 'WeasyPrint is great until you hit a font fallback issue — ended up bundling fonts explicitly. Also: drag-and-drop without a library is doable but you really want to write the state machine on paper first.',
-      github: 'https://github.com/grmaruf/resume-builder',
-      demo: '#'
-    },
-    'job-portal': {
-      title: 'Job Portal',
-      sub: 'Two-sided · Applications · Saved searches · Alerts',
-      img: 'https://picsum.photos/seed/project-job-portal/1200/675',
-      overview: 'A two-sided job board where employers post openings and candidates apply with tracked status. Includes saved searches that run nightly via Celery, emailing candidates new matches. Designed the schema to support future features (saved candidates, employer branding) without a rewrite.',
-      features: [
-        'Two role types (employer, candidate) with separate onboarding flows',
-        'Job posting with rich-text description, tags, salary range, and location type',
-        'Application tracking with status transitions and email notifications',
-        'Saved searches with nightly Celery beat job sending digest emails',
-        'Full-text search on job title and description via PostgreSQL tsvector',
-        'Rate-limited application submission to prevent spam'
-      ],
-      tags: ['Django', 'DRF', 'PostgreSQL', 'Celery', 'Redis', 'Docker'],
-      learned: 'Designing the application state machine upfront would have saved me a migration headache later. Also: full-text search in Postgres is criminally underrated — you can ship a real search feature without Elasticsearch for a long time.',
-      github: 'https://github.com/grmaruf/job-portal',
-      demo: '#'
-    },
-    'studyhub': {
-      title: 'StudyHub',
-      sub: 'Study groups · Shared notes · Spaced repetition',
-      img: 'https://picsum.photos/seed/project-studyhub/1200/675',
-      overview: 'A platform for small study groups — shared notes, threaded discussions, and a spaced-repetition card system with daily review reminders. Built to scratch my own itch during exam season; now used by ~30 classmates.',
-      features: [
-        'Group creation with invite codes and role-based membership',
-        'Shared Markdown notes with collaborative editing (CRDT-lite via operational transform)',
-        'Threaded discussions with nested replies and code formatting',
-        'Spaced-repetition card system based on SM-2 algorithm',
-        'Daily review reminder emails via Celery',
-        'Per-group analytics showing review consistency'
-      ],
-      tags: ['Django', 'HTMX', 'PostgreSQL', 'Redis', 'Celery'],
-      learned: 'HTMX is a delightful middle ground when React feels like overkill — you can build genuinely interactive UIs while keeping the mental model server-first. CRDTs are hard; I ended up with a simplified OT that works for small groups.',
-      github: 'https://github.com/grmaruf/studyhub',
-      demo: '#'
-    },
-    'portfolio': {
-      title: 'Portfolio Website',
-      sub: 'Semantic HTML · Vanilla CSS · Accessible · Fast',
-      img: 'https://picsum.photos/seed/project-portfolio-site/1200/675',
-      overview: 'This very site. Built with HTML5, vanilla CSS (custom properties + a clear architecture), and a small amount of vanilla JS. Focus on accessibility (semantic HTML, focus states, prefers-reduced-motion), performance (no framework, system fonts fallback, lazy images), and clean code that serves as a portfolio piece in itself.',
-      features: [
-        'Semantic HTML5 structure with one h1 per page and logical heading hierarchy',
-        'CSS architecture split into variables / reset / utilities / animations / components',
-        'Dark/light theme toggle with localStorage persistence and prefers-color-scheme fallback',
-        'All animations respect prefers-reduced-motion',
-        'Lighthouse score 95+ across all categories',
-        'JSON-LD structured data for Person schema'
-      ],
-      tags: ['HTML5', 'CSS3', 'Vanilla JS', 'A11y', 'SEO'],
-      learned: 'Building a portfolio in vanilla CSS makes you actually understand the cascade. I also learned that "accessible" is not a checkbox — every interactive element needs a keyboard story, not just an aria-label.',
-      github: 'https://github.com/grmaruf/portfolio',
-      demo: '#'
-    },
-    'expense-api': {
-      title: 'Expense Tracker API',
-      sub: 'Headless · OpenAPI · pytest · CSV export',
-      img: 'https://picsum.photos/seed/project-expense-api/1200/675',
-      overview: 'A headless (no UI) expense-tracking API designed as a study in clean REST design. Categories, recurring transactions, monthly summaries, CSV export. Fully documented with OpenAPI, 90% test coverage with pytest, and a small CLI client for personal use.',
-      features: [
-        'Full CRUD for transactions, categories, and accounts',
-        'Recurring transaction support with daily/weekly/monthly frequencies',
-        'Monthly summary endpoint with category breakdown and trends',
-        'CSV export endpoint with streaming response for large datasets',
-        'OpenAPI schema auto-generated via drf-spectacular, served at /schema/',
-        '90% test coverage with pytest and pytest-django, including edge cases'
-      ],
-      tags: ['Django', 'DRF', 'OpenAPI', 'pytest', 'PostgreSQL'],
-      learned: 'Writing tests first forces you to think about the API from the consumer\'s perspective. drf-spectacular is genuinely better than hand-writing OpenAPI specs. Streaming responses for CSV export is a 10-line change that prevents OOM on large datasets.',
-      github: 'https://github.com/grmaruf/expense-api',
-      demo: '#'
-    }
-  };
+  const PROJECTS = JSON.parse(document.getElementById('project_data').textContent);
+  console.log(PROJECTS);
 
   function open(projectId) {
     const data = PROJECTS[projectId];
     if (!data) return;
-    document.getElementById('modal-img').src = data.img;
+
+    if (data.img) document.getElementById('modal-img').src = data.img;
+    else document.getElementById('modal-img').src = "https://picsum.photos/seed/project-quiz-portal/640/400";
     document.getElementById('modal-img').alt = data.title + ' screenshot';
     document.getElementById('modal-title').textContent = data.title;
     document.getElementById('modal-sub').textContent = data.sub;
@@ -445,20 +339,21 @@
     });
   });
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', (e) => {
     let valid = true;
     form.querySelectorAll('input, textarea').forEach(field => {
       if (!validate(field)) valid = false;
     });
+    
     if (!valid) {
+      e.preventDefault(); // Stop submission ONLY if validation fails
       const firstError = form.querySelector('.has-error input, .has-error textarea');
       if (firstError) firstError.focus();
       return;
     }
-    // Simulate successful submit (replace with real endpoint)
-    success.classList.add('is-visible');
-    form.reset();
-    setTimeout(() => success.classList.remove('is-visible'), 6000);
+    
+    // REMOVED form.reset() and success.classList.add() from here.
+    // Let the HTML POST request happen naturally.
   });
+
 })();

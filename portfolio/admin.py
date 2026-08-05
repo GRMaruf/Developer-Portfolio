@@ -8,6 +8,7 @@ admin.site.register([
     SkillCategory,
     Skill,
     Project,
+    ProjectDetail,
     Tag,
     TypedText,
     BadgeText,

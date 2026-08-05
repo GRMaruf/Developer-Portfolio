@@ -255,11 +255,15 @@
       <p class="section-lead">Click any card for the longer write-up — features, schema, what broke, what I'd do differently.</p>
     </div>
 
+    <div hidden>
+      {{ project_data|json_script:"project_data" }}
+    </div>
+
     <div class="projects-grid" id="projects-grid">
       <!-- Project cards injected by JS, with fallback below -->
         
       {% for project in portfolio.projects.all %}
-      <article class="card project-card reveal reveal-delay-{{ forloop.counter }}" data-project="quiz-portal">
+      <article class="card project-card reveal reveal-delay-{{ forloop.counter }}" data-project="{{project.title|slugify}}">
         <div class="project-thumb">
           <img src="{% if project.screenshot %}{{ project.screenshot.url }}{% else %}https://picsum.photos/seed/project-quiz-portal/640/400{% endif %}" alt="{{ project.title }} screenshot" loading="lazy" />
           <div class="project-thumb-overlay"><span class="chip">Featured</span></div>
@@ -517,7 +521,8 @@
         </div>
       </div>
 
-      <form class="form reveal reveal-delay-2" id="contact-form" novalidate>
+      <form method="POST" action="" class="form reveal reveal-delay-2" id="contact-form" novalidate>
+        {% csrf_token %}
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
@@ -540,8 +545,14 @@
           <textarea id="message" name="message" rows="6" required></textarea>
           <span class="form-error" data-error-for="message"></span>
         </div>
-        <div class="form-success" id="form-success">
-          ✓ Thanks — message received. I'll get back to you within a day.
+        <div id="form-message">
+          {% if messages %}
+          {% for message in messages %}
+            <div class="form-success is-visible" id="form-success">
+              ✓ {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         </div>
         <div class="form-submit">
           <button type="submit" class="btn btn-primary">
