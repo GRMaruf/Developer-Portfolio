@@ -191,19 +191,19 @@
       <div class="reveal reveal-delay-2">
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-value" data-counter="15"><span class="suffix">+</span></div>
+            <div class="stat-value" data-counter="{{ portfolio.project_shipped }}"><span class="suffix">+</span></div>
             <div class="stat-label">Projects shipped</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value" data-counter="1200"><span class="suffix">+</span></div>
+            <div class="stat-value" data-counter="{{ portfolio.git_commits }}"><span class="suffix">+</span></div>
             <div class="stat-label">Git commits / yr</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value" data-counter="180"><span class="suffix">+</span></div>
+            <div class="stat-value" data-counter="{{ portfolio.leetcode_solved }}"><span class="suffix">+</span></div>
             <div class="stat-label">LeetCode solved</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value" data-counter="3"><span class="suffix">+</span></div>
+            <div class="stat-value" data-counter="{{ portfolio.years_coding }}"><span class="suffix">+</span></div>
             <div class="stat-label">Years coding</div>
           </div>
         </div>
@@ -446,19 +446,19 @@
       <h3 style="font-size:1.1rem; margin-bottom:1.25rem; font-family:var(--font-mono); color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em;">GitHub stats — last 12 months</h3>
       <div class="gh-stats">
         <div class="card gh-stat">
-          <div class="gh-stat-value" data-counter="42">0</div>
+          <div class="gh-stat-value" data-counter="{{ portfolio.public_repos }}">0</div>
           <div class="gh-stat-label">Public repos</div>
         </div>
         <div class="card gh-stat">
-          <div class="gh-stat-value" data-counter="310"><span class="suffix">+</span></div>
+          <div class="gh-stat-value" data-counter="{{ portfolio.stars_earned }}"><span class="suffix">+</span></div>
           <div class="gh-stat-label">Stars earned</div>
         </div>
         <div class="card gh-stat">
-          <div class="gh-stat-value" data-counter="1240"><span class="suffix">+</span></div>
+          <div class="gh-stat-value" data-counter="{{ portfolio.contributions }}"><span class="suffix">+</span></div>
           <div class="gh-stat-label">Contributions</div>
         </div>
         <div class="card gh-stat">
-          <div class="gh-stat-value" data-counter="68">0</div>
+          <div class="gh-stat-value" data-counter="{{ portfolio.pull_counts }}">0</div>
           <div class="gh-stat-label">Pull requests</div>
         </div>
       </div>

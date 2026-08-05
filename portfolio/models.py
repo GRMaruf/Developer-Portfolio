@@ -35,6 +35,17 @@ class Portfolio(models.Model):
     hackerrank = models.URLField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
 
+    # Stats
+    project_shipped = models.PositiveSmallIntegerField(default=0)
+    git_commits = models.PositiveSmallIntegerField(default=0)
+    leetcode_solved = models.PositiveSmallIntegerField(default=0)
+    years_coding = models.PositiveSmallIntegerField(default=0)
+    public_repos = models.PositiveSmallIntegerField(default=0)
+    stars_earned = models.PositiveSmallIntegerField(default=0)
+    contributions = models.PositiveSmallIntegerField(default=0)
+    pull_counts = models.PositiveSmallIntegerField(default=0)
+     
+
     # Footer note
     footnote = models.TextField(blank=True, null=True)
 
